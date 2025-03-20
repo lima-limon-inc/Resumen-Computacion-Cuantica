@@ -1,0 +1,3 @@
+#+title: README
+# https://youtu.be/_-jQr2As9z0?si=uWbLZKUouECKFmEQ&t=4
+Resumen de la materia Computacion Cuantica
