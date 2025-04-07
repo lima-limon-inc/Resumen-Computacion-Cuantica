@@ -14,7 +14,6 @@ Consiste en conjugar y transponer un vector
 Se represneta con una ${ \text{daga}\textsuperscript{\textdagger} }$ 
 
 * Notacion de Dirac
-
 ** Elementos
 *** Kets
 Representa un *vector columna*.
@@ -101,7 +100,11 @@ El producto interno de dos kets da como resultado un operador lineal. Se denota:
 
 Al igual qie con las matrices tradicionales, cuando se le aplica a un ket da otro ket.
 
-
+* Operadores
+** Hermiticos
+** Unitarios
+** Proyeccion
+Dado un ket de norma 1, la proyeccion se define como ${ \hat P_{\ket{\Phi}} = \ket \Phi \bra \Phi}$ siempre que ${ \Phi }$ este expresado como BON.
 * Footnotes
 
 [fn:1] En clase no lo vimos como propiedad 9 como tal, lo pongo asi para simplificar
