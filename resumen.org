@@ -13,6 +13,10 @@ Consiste en pasar de un vector fila a columna y viceversa.
 Consiste en conjugar y transponer un vector
 Se represneta con una ${ \text{daga}\textsuperscript{\textdagger} }$ 
 
+*** Autovectores y autovalores
+Sea una matriz ${ \hat A }$ cuyo espectro de autovalores no degenerado (cada autovalor tiene multiplicad 1); cada autovalor tiene un autovector asociado. Ademas se cumple:
+
+${ \hat A \cdot v_n = a_n \cdot v_n}$
 * Notacion de Dirac
 ** Elementos
 *** Kets
@@ -105,6 +109,70 @@ Al igual qie con las matrices tradicionales, cuando se le aplica a un ket da otr
 ** Unitarios
 ** Proyeccion
 Dado un ket de norma 1, la proyeccion se define como ${ \hat P_{\ket{\Phi}} = \ket \Phi \bra \Phi}$ siempre que ${ \Phi }$ este expresado como BON.
+* Postulados de la Mecanica cuantica
+** Postulado 1
+#+begin_quote
+Todo sistema cuantico tiene un espacio vectorial *complejo* con producto interno conocido como espacio de estados.
+
+El estado cuantico del sistema queda completamente desctipto por un ket de estado ${ \ket \Psi (t) }$ normalizado.
+#+end_quote
+
+Esto quiere decir que todo sistema tiene un conjunto de "infinitos" estados en los que puede estar el sistema. En si, el estado cuantico en un momento ${ t }$ se llama ${ \ket \Psi }$.
+
+Sigue aplicando el principio de superposicion, la combinacion lineal de kets de estado; es un ket de estado. Ademas, si un sistema puede estar en estado ${ \ket a }$ y ${ \ket b }$; puede estar en una superposicion lineal de dichos estados.
+
+
+Dado el espacio formado por la base ortonormal ${ B = \{ \ket \phi_1, \dots \ket \phi_n \} }$; el estado cuantico "generico" se puede escribir:
+
+${ \ket \Psi (t) = c_1 (t) \ket \phi_1 + \dots  c_n (t) \ket \phi_n}$
+
+Cada una de las ${ c }$ representan amplitudes de probabilidad en un momento dado ${ t }$.
+Estas ${ c }$ se van modificando por el uso de compuertas cuanticas.
+
+Ademas, como el ket esta normalizado se cumple:
+
+${ \displaystyle\sum_{i = 1}^n | c_i(t)|^2 }$
+** Postulado 2
+Cada cantidad física medible ${ \mathcal A }$  se describe mediante un operador hermítico ${ \hat A }$   que actúa sobre kets del espacio de estados del sistema. Este operador ${ \hat A }$  es un observable.
+*** Observable
+Decimos que un operador hermitico es observable si *su base ortonormal de autovectores tambien forma una base ortonormal del espacio de estados del sistema*.
+** Postulado 3
+
+Los unicos resultados posibles de una mediciohn con una cantidad fisica ${ \mathcal A }$ es *alguno de los autovalores* del operador hermitico correpondiente ${ \hat A }$.
+
+Observaciones:
+- Para obtener los autovalores de un operador hermítico ${ \hat A }$ se diagonaliza la matriz A asociada a dicho operador en una dada base.
+- Una medición de la cantidad física A siempre da como resultado un valor real
+- Como el espectro de autovalores es discreto[fn:2], se dice que los resultados que se pueden obtener al medir la cantidad física A están cuantizados.
+*** Spin
+Una representacion fisica de este postulado es el del Spin.
+Este, es una propiedad que tienen algunas particulas; lo importante para la materia es que *cuando mido la proyeccion spin, me da 1 o -1; NADA MAS*.
+
+Esto es justamente la "implementacion" del postulado; tengo una propiedad que esta en una superposicion de estados, pero *apenas lo mido colapsa a 1 o -1*.
+** Postulado 4
+Cuando se mide la cantidad fisica a un estado cuantico, la probabilidad de obtener el autovalor ${ a_n }$ es:
+
+${ \mathbb{P}(a_n) = |\braket{\phi_n|\Psi(t)}|^2 = |c_n(t)|^2}$ 
+
+Es decir; podes obtener la probabilidad de obtener un autovalor antes de medir el estado cuantico.
+
+
+${ \mathbb{P}(a_n) = |\braket{\phi_n|\Psi(t)}|^2 = |c_n(t)|^2}$ 
+*** Autovalores degenerados
+En caso de que haya autovalores degenerados, se puede hallar asi:
+
+${ \displaystyle \sum_{i = 1}^q |c_i|^2  }$ 
+
+Siendo ${ q }$  la cantidad de autovalores distintos.
+*** Fase global
+Decimos que ${ \ket \Psi }$ y ${ \ket \psi }$ difieren en una fase global si se da lo siguiente:
+${ \ket \psi = e ^{i \cdot \theta} \ket \Psi }$ 
+**** Probabilidades predichas
+Las probabilidades predichas para una medicion arbitraria son las mismas para ambos.
+
+*Difieren matematicamente, pero fisicamente son iguales*. Esto implica que *representan el mismo estado cuantico*.
+
 * Footnotes
+[fn:2] Al menos en la materia.
 
 [fn:1] En clase no lo vimos como propiedad 9 como tal, lo pongo asi para simplificar
