@@ -1,5 +1,6 @@
 #+title: resumen
 #+LATEX_HEADER: \usepackage{braket}
+#+LATEX_HEADER: \usepackage{amsmath}
 
 * Algebra pre-eliminar
 ** Operaciones
@@ -166,12 +167,154 @@ ${ \displaystyle \sum_{i = 1}^q |c_i|^2  }$
 Siendo ${ q }$  la cantidad de autovalores distintos.
 *** Fase global
 Decimos que ${ \ket \Psi }$ y ${ \ket \psi }$ difieren en una fase global si se da lo siguiente:
-${ \ket \psi = e ^{i \cdot \theta} \ket \Psi }$ 
+${ \ket \psi = e ^{i \cdot \theta} \ket \Psi }$
 **** Probabilidades predichas
 Las probabilidades predichas para una medicion arbitraria son las mismas para ambos.
 
 *Difieren matematicamente, pero fisicamente son iguales*. Esto implica que *representan el mismo estado cuantico*.
 
+** Postulado 5: Reduccion o colapso del estado de un Ket.
+Cuando medis un ket, pierde las propiedades cuanticas. El observable ${ \hat A }$  representa la cantidad fisica subyaciente y tenes ${ \ket \Psi (t) }$  que describe el estado cuantico antes de medir.
+
+Cuando vos lo medis pueden darse varias cosas:
+
+
+*** Caso 1: ${ \hat A }$ tiene autovalores discretos no repetidos
+El resultado de la medicion es ${ a_n }$. ${ a_n }$  tiene asociado el autovector ${ \ket {\phi_n }}$.
+
+*El estado del sistema despues de realizar la medicion es el autovector ${ \ket {\phi_n} }$.*
+
+Este nuevo estado evoluciona segun [[Postulado 6]].
+
+*** Caso 2: ${ \hat A }$ tiene autovalores discretos repetidos (degenerados)
+
+Si la medicion da un auto valor que esta asociado a varios autovectores, el resultado /inmediatamente despues/ es la proyeccion normalizada de ${ \ket {\Phi(t)} }$ sobre el autoespacio generado por todos los autovectores asociados a ese autovalor (digamos ${  \phi_1, \phi_2, \phi_k  }$) . A esa proyeccion la llamamos ${ \hat P_n }$  y se obtiene:  ${ \hat P_n = \ket \phi_1 \bra \phi_1 + \ket \phi_2 \bra \phi_2 + \ket \phi_k \bra \phi_k }$ .
+
+${ \ket {\widetilde \Phi } = \frac{\hat P_n \ket {\Phi (t)}}{\sqrt{\bra \Phi \hat P_n \textsuperscript{\textdagger} \hat P_n \ket \Phi}}}$.
+
+** Postulado 6
+La evolucion de un sistema cuantico se puede describir mediante una transformacion unitaria.
+
+* TODO Experimento Stern-Gerlach
+* Qubit
+Objeto matematico cuyo estado es un ket normalizado.
+
+Puede hallarse en una superposicion cuantica (combinacion lineal) de estados.
+
+${\ket \Phi = \alpha \ket 0 + \beta \ket 1}$
+
+${ \alpha \text{ y } \beta }$ son amplitudes de probabilidad y pueden ser complejos. El [[Postulado 4]] nos indica que representan la probabilidad de que, si se realiza una medicion, el ket de estado se proyecte sonbre los autovectores asociados.
+** Base ortonormal
+La BON ${ B = \{ \ket 0, \ket 1 \} }$ tienen distintas implementaciones fisicas dependendiendo del qubit subyaciente
+- Los estados vertical y horizontal de la polarizacion de un foton.
+- Los estados diagonal y anti-diagonal de la polarizacion de un foton.
+- Los estados spin up y spin down de un foton.
+** Esfera de Bloch
+Vos podes expresar el qubit en la esfera de Bloch.
+
+Te queda:
+
+${ \ket \phi = cos(\frac{\theta}{2}) \ket 0 + sen(\frac{\theta}{2}) e^{i \cdot \phi} \ket 1}$
+
+- ${ \theta }$ y ${ \phi }$ descrinen un punto sobre la esfera de radio 1.
+
+
+[[file:images/esfera-bloch.png]]
+*** Ejemplo:
+
+[[file:images/esfera-bloch-ejemplo.png]]
+** Estados de 2 Qubits
+El estado generico se puede escribir:
+#+begin_export latex
+$$
+\ket \Phi = (a \ket 0 + b \ket 1) \otimes (c \ket 0 + \d \ket 1)
+\ket \Phi = ac \ket{00} + ad \ket {01} + bc \ket{10}  + bd \ket {11}
+$$
+#+end_export
+Entonces, si vos te dan un ${ \Phi }$, vos podes hallar los valores originales de los ket si resolves un sistema de ecuaciones.
+*** Estados producto
+Se dice que es un estado producto o estado separable si puede escribirse como un producto tensorial de los estados de cada qubit.
+Matimaticamente:
+#+begin_export latex
+$$
+\ket \Phi = \ket{\psi}_a \otimes \ket{\psi}_b
+$$
+#+end_export
+Siendo ${ \ket \Phi }$ el estado del sistema de 2 qubits, y los otros kets son cada ket.
+Cuando se da esto, el estado de un ket *no tiene influencia sobre el otro*, es decir los resultados de las mediciones no están correlacionados.
+
+*** Estados entrelazados
+Se dice que es un estado producto o estado separable si /*NO*/ puede escribirse como un producto tensorial de los estados de cada qubit.
+Ejemplo:
+#+begin_export latex
+$$
+\ket \Phi = 0 \ket{00} + 1 \ket{01} + 1 \ket 0
+$$
+#+end_export
+Si tratas de hallar ${ a,b,c,d }$ , te da un absurdo.
+
+**** Entrelazamiento cuantico
+Cuando 2 qubits están entrelazadas, tienen un estado *cuantico compartido*. Esto quiere decir, que el resultado de medir una particula NO es independiente de la otra. Si vos medis una, *el estado cuantico se parte*; lo cual implica que sabes que va a medir a la otra particula.
+
+* Producto tensorial
+Sea dos kets ${ \ket V }$ y ${ \ket W }$, ${ \ket v \otimes  \ket w }$ (abreviado a ${ \ket {vw} }$ da un espacio vectorial de dimension ${ n_v \cdot n_w }$.
+
+Consiste en hacer la distributiva de cada ket entre si, muchos se terminan cancelando.
+
+#+begin_export latex
+$$
+\begin{aligned}
+
+\ket V \otimes \ket W = (a \ket 0 + b \ket 1) + (c \ket 2 + d \ket 3 + e \ket 4)
+
+\ket V \otimes \ket W = ac \ket {02} + ad \ket {03} + ae \ket {04} + bc \ket {12} + bd \ket {13} + be \ket {14}
+
+\end{aligned}
+$$
+#+end_export
+** Propiedades
+*** No es conmutativo
+*** Aplicacion de escalares
+
+#+begin_export latex
+$$
+\alpha (\ket v \otimes \ket w) = (\alpha \ket v) \otimes \ket w = \ket v \otimes (\alpha \ket w)
+$$
+#+end_export
+*** Distributiva
+Aplica incluso si ${ \ket w }$ esta adelante del parentesis sumando
+#+begin_export latex
+$$
+(\ket v_1 + \ket v_2) \otimes \ket w = \ket v_1 \otimes \ket w + \ket v_2 \otimes \ket w
+$$
+#+end_export
+*** Distributiva de operadores lineales
+#+begin_export latex
+$$
+\hat A \otimes \hat B (\ket v \otimes \ket w) = \hat A \ket v \otimes \hat B \ket w
+$$
+#+end_export
+*** Conjugado hermitico
+#+begin_export latex
+$$
+(\ket v \otimes \ket w)\textsuperscript{\textdagger} = \ket v \textsuperscript{\textdagger} \otimes \ket w \textsuperscript{\textdagger} = \bra v \otimes \bra w
+$$
+#+end_export
+*** Producto interior
+#+begin_export latex
+$$
+\braket{\alpha|\beta} = \braket{v_1w_1|v_2w_2} = \braket{v_1|v_2} \braket{w_1|w_2}
+$$
+#+end_export
+*** Proyectores
+${ \hat P_V }$  es un proyector sobre ${ V }$ y ${ \hat P_W  }$ es un proyector sobre ${ W }$.
+#+begin_export latex
+$$
+\hat P_V \otimes \hat P_W = (\sum_{i=1}^r \ket v_i \bra v_i ) \otimes (\sum_{j=1}^r \ket w_j \bra w_j) = \sum_{i,j} \ket v_i \bra v_i \otimes \ket w_j \bra w_j
+$$
+#+end_export
+
+* Compuertas cuanticas
 * Footnotes
 [fn:2] Al menos en la materia.
 
