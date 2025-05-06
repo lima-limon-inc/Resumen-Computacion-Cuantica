@@ -314,7 +314,153 @@ $$
 $$
 #+end_export
 
-* Compuertas cuanticas
+* Compuertas cuanticas de 1 Qubit
+Una computadora cuántica se construye a partir de un circuito cuántico que contiene
+- cables: Transmiten informacion
+- Puertas cuánticas: Manipulan el estado cuantico de la informacion
+
+Las compuertas cuanticas son operadores unitarios.
+** Identidad
+Identificada con ${ I }$.
+*** Efecto BON
+#+begin_export latex
+$$
+I \ket 0 = \ket 0
+I \ket 1 = \ket 1
+$$
+#+end_export
+*** Representacion matricial
+#+begin_export latex
+$$
+\begin{bmatrix}
+    1 & 0 \\
+    0 & 1 \\
+\end{bmatrix}
+$$
+#+end_export
+** Negacion
+Identificada con ${ X }$ .
+*** Efecto BON
+#+begin_export latex
+$$
+X \ket 0 = \ket 1
+X \ket 1 = \ket 0
+$$
+#+end_export
+*** Representacion matricial
+#+begin_export latex
+$$
+\begin{bmatrix}
+    0 & 1 \\
+    1 & 0 \\
+\end{bmatrix}
+$$
+#+end_export
+*** Efecto en la esfera
+Hace girar el qubit en el eje.
+[[file:images/negacion.png]]
+*** Efecto en el ket:
+${ \ket \Phi = \alpha \ket 0 + \beta \1 }$ 
+${ X \ket \Phi = \beta \ket 0 + \alpha \ket 1 }$ 
+** Puerta Z
+*** Efecto BON
+#+begin_export latex
+$$
+Z \ket 0 = \ket 0
+Z \ket 1 = - \ket 1
+$$
+#+end_export
+*** Representacion matricial
+#+begin_export latex
+$$
+\begin{bmatrix}
+    1 & 0 \\
+    0 & -1 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    1 & 0 \\
+    0 & e^{i\pi} \\
+\end{bmatrix}
+
+$$
+#+end_export
+*** Efecto en la esfera
+Produce una rotacion de angulo ${ \pi }$ sobre el eje Z
+[[file:images/puertaz.png]]
+
+*** Efecto en el ket:
+${ \ket \Phi = cos(\frac{\theta}{2}) \ket 0 + sin(\frac{\theta}{2}) e^{i \cdot \varphi} }$
+${ Z \ket \Phi = cos(\frac{\theta}{2}) \ket 0 + sin(\frac{\theta}{2}) e^{i \cdot (\varphi + \pi)} }$
+
+** Puerta Y
+Replica el efecto de aplicar Z y luego X al ket, con una fase global.
+${ Y \ket \Phi = e^{i \cdot \frac{\pi}{2}} X Z }$ ${ \ket \Phi }$ .
+*** Efecto BON
+#+begin_export latex
+$$
+Y \ket 0 = i \ket 1
+Y \ket 1 = -i \ket 0
+$$
+#+end_export
+*** Representacion matricial
+#+begin_export latex
+$$
+\begin{bmatrix}
+    0 & -i \\
+    i &  0 \\
+\end{bmatrix}
+$$
+#+end_export
+** Puerta de corrimiento de fase ${ R_z (\delta) }$ 
+Representa una familia de compueras, cada una tomando un valor distinto de ${ \delta }$.
+genera una rotación antihoraria (si ${ \delta > 0 }$ ) o una rotación horaria (si ${ \delta < 0 }$) del qubit alrededor del eje z en la esfera de Bloch
+*** Efecto BON
+#+begin_export latex
+$$
+R_z(\delta) \ket 0 = \ket 0
+R_z(\delta) \ket 1 = e^{i \cdot \delta} \ket 0
+$$
+#+end_export
+
+*** Representacion matricial
+#+begin_export latex
+$$
+\begin{bmatrix}
+    1 &  0 \\
+    0 &  e^{i \cdot \delta} \\
+\end{bmatrix}
+$$
+#+end_export
+*** Efecto en el ket
+${ \ket \Phi = cos(\frac{\theta}{2}) \ket 0 + sin(\frac{\theta}{2}) e^{i \cdot \varphi} }$
+${ R_z (\delta) \ket \Phi = cos(\frac{\theta}{2}) \ket 0 + sin(\frac{\theta}{2}) e^{i \cdot (\varphi + \delta )} }$
+** Puerta de Hadamard
+*Puerta super importante*, agarre un qubit y lo pone en un estado de superposicion.
+
+Ademas, es involutiva, si aplicas Hadamard dos veces, vuelve al original.
+*** Efecto BON
+#+begin_export latex
+$$
+H \ket 0 = \frac{\ket 0 + \ket 1}{\sqrt 2}
+H \ket 1 = \frac{\ket 0 - \ket 1}{\sqrt 2}
+$$
+#+end_export
+
+*** Representacion matricial
+#+begin_export latex
+$$
+\frac{1}{\sqrt 2}
+\begin{bmatrix}
+    1 &  1 \\
+    1 &  1 \\
+\end{bmatrix}
+$$
+#+end_export
+
+*** Efecto en la esfera
+[[file:images/hadamard.png]]
+
 * Footnotes
 [fn:2] Al menos en la materia.
 
