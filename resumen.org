@@ -18,6 +18,15 @@ Se represneta con una ${ \text{daga}\textsuperscript{\textdagger} }$
 Sea una matriz ${ \hat A }$ cuyo espectro de autovalores no degenerado (cada autovalor tiene multiplicad 1); cada autovalor tiene un autovector asociado. Ademas se cumple:
 
 ${ \hat A \cdot v_n = a_n \cdot v_n}$
+** Funciones booleanas
+*** Balanceadas
+Decimos que una funcion booleana es constante cuando la respuesta siempre es lo mismo independientemente del output.
+Ejemplo:
+| Constante                     | Balanceada                    |
+|-------------------------------+-------------------------------|
+| ${ f(0) = 0 \land f(1) = 0 }$ | ${ f(0) = 1 \land f(1) = 0 }$ |
+| ${ f(0) = 1 \land f(1) = 1 }$ | ${ f(0) = 0 \land f(1) = 1 }$ |
+
 * Notacion de Dirac
 ** Elementos
 *** Kets
@@ -89,8 +98,8 @@ Se utiliza la siguiente base ortonormal:
 Es decir, todo vector se puede escribir como combinacion lineal de estos:
 ${\ket \Phi =
 \begin{pmatrix}
-    \alpha \\
-    \beta
+\alpha \\
+\beta
 \end{pmatrix}}$
 
 ${\ket \Phi = \alpha \ket 0 + \beta \ket 1}$
@@ -461,7 +470,142 @@ $$
 *** Efecto en la esfera
 [[file:images/hadamard.png]]
 
+* Compuertas de 2 qubits
+** Producto tensorial aplicado a las compuertas.
+Lo lindo del producto tensorial es que aplica las compuertas a los qubits 1 a 1.
+Se cumple que ${ \ket{x_1 x_2} = \ket{x_1} \otimes \ket{x_2} }$ y tambien se cumple ${ U \otimes V \ket{x_1 x_2} = U \ket{x_1} \otimes V \ket{x_2} }$.
+
+** Compuertas de 1 qubit pero con dos
+Funcionan igual que las compuertas de 1 qubit pero tienen un subindice indicando a que qubit afectan.
+** Waslh Hadamard
+Son simplemente dos compuertas de hadamard, una a cada qubit.
+${ W = H \otimes H }$ 
+** CNOT
+Esta es una compuerta no separable, es decir que afecta a los dos qubits.
+
+Realiza una operacion de XOR en los qubits, almacena el resultado en el 2do qubit.
+Esto se puede ver como "Si el bit de control esta prendido, altera el segundo".
+| Qubit de Control | 2do qubit | Qubit resultado (almacenado en el 2do) |
+|------------------+-----------+----------------------------------------|
+|                0 |         0 |                                      0 |
+|                0 |         1 |                                      1 |
+|                1 |         0 |                                      1 |
+|                1 |         1 |                                      0 |
+
+El de control es el del circulo negro, el resultado es la X
+[[file:images/CNOT.png]]
+
+** Swap
+Intercambia los qubit
+${ S \ket{x_1 x_2} = \ket{x_2 x_1} }$
+
+** CPH(${ \delta }$)
+Aplica un corrimiento de fase al qubit objetivo (target) sólo cuando el qubit de control se encuentra en 1.
+| Qubit de Control | 2do qubit | Qubit resultado (almacenado en el 2do) |
+|------------------+-----------+----------------------------------------|
+|                0 |         0 | 0                                      |
+|                0 |         1 | 1                                      |
+|                1 |         0 | 0[fn:3]                                |
+|                1 |         1 | ${e^{i \cdot \delta}}$                 |
+* Compuertas de 3 qubits
+** Toffoli
+Los dos primeros qubits son de control y el 3ro es el objetivo.
+[[file:images/Toffoli.png]]
+
+Realiza: C XOR (A and B) y almacena el resultado en C
+
+** Fredkin (Controlled swap)
+Realiza la sigiente operacion
+
+[[file:images/Fredkin.png]]
+
+El + es "and" y el ${ \cdot  }$ es "or".
+
+Funciona igual que la not controlada ocn un unico target pero afecta a varios targets.
+
+*NO es una compuerta equivalente, tienen distinta matriz*.
+
+** Compuerta U controlada
+
+TIene 1 qubit de control y n afectados.
+[[file:images/CompuertaU.png]]
+
+** Compuerta oraculo
+*** Funcion booleana
+La compuerta oraculo viene asociada a una funcion booleana ${ f(x) }$ toma como entrada strings de 1 y 0 de longitud ${ n }$ y tiene una salida de 1 bit.
+
+*** Qubits
+${ \ket x }$ es un string de bits de longitd n
+${ \ket y }$ es un qubit de control
+
+Entonces ${ U_f \ket{x, y} = \ket{x,y \oplus f(x) }}$. (${ \oplus }$ es xor.)
+
+${ \ket y }$ es un solo qubit "oraculo". *${ \ket y }$ cambia si ${ f(x) = 1 }$* y permance igual si ${ f(x) = 0 }$.
+El ${ \ket x }$ queda igual.
+
+[[file:images/Oraculo.png]]
+
+*** Propiedades
+Cumple con la siguiente propiedad
+
+${ U_f [\ket x \otimes (\ket 0 - \ket 1)] = (-1)^{f(x)} \ket x \otimes (\ket 0 - \ket 1)}$.
+
+** Transformada de Hadamard
+N compuertas de Hadamard en n qubits.
+[[file:images/TrasformadaHadamard.png]]
+Aca se ve que te quedan todos los qubits de la bon. Esto pasa si tenes ${ \ket 0 }$.
+
+Generalizada (para cualquier ket), queda
+
+
+${ H^{\otimes n} \ket{x}^{\otimes n} = \frac{1}{\sqrt{2^n}} \displaystyle{\sum^{2^n -1 }_{x=0}} (-1) ^ {\bar x \cdot \bar y} \ket y }$
+
+Siendo:
+- ${ \ket{a b} = \ket x }$
+- ${ \ket{a} = \ket y }$
+- ${  \bar x \cdot \bar y }$ es el producto interno entre el ket x e y.
+
+* Circuitos cuanticos
+** Simbolos
+[[file:images/simbolos.png]]
+** Mediciones
+Las mediciones se hacen a traves de ${ \hat M _m }$. ${ m }$ refiere a las posibles resultados de las mediciones.
+Dado ${ \ket \Psi }$,
+- La prob de que ocurra ${ m }$:  ${ \mathbb{P}(m) = \braket{\Psi|M_m| \Psi} }$
+- El estado despues de medir: ${ \ket{\widetilde \Psi} = \frac{M_m \ket \Psi}{\sqrt{\braket{\Psi|M_m|\Psi}}} }$
+
+* TODO Paralelismo cuantico
+
+* Algoritmos cuanticos
+** Deutch
+Es un algoritmo que nos dice si una funcion es balanceada o constante usando *una unica medicion*.
+
+*** Pasos
+[[file:images/deutch.png]]
+1. Tenes que tener el estado inicial en ${ \ket{01} }$ 
+2. Aplicar la compuerta de Hadamard en paralelo al estado inicial
+3. Aplicar ${ U_f }$ al estado obtenido
+4. Aplicas Hadamard al primer qubit.
+5. Realizas una medicion en el primer qubit de la salida.
+
+Antes de medir, el estado es:
+| Constante                                                    | Balanceado                                                   |
+|--------------------------------------------------------------+--------------------------------------------------------------|
+| ${ \pm \frac{1}{\sqrt{2}} \ket 0 \otimes (\ket 0 - \ket 1)}$ | ${ \pm \frac{1}{\sqrt{2}} \ket 1 \otimes (\ket 0 - \ket 1)}$ |
+
+Despues de medir, el resultado te dice cual es el valor de la medicion
+- Si medis 0, es constante
+- Si medis 1, es balanceado
+
+** Deutch - Jozsa
+Generalizacion de deutch para N qubits. Si f(x) es constante, valo lo mismo para todos los x.
+[[file:images/deutch-jozsa.png]]
+
+El estado antes de medir es:
+${ \frac{1}{2^n} \displaystyle{\sum^{2^n-1}_{y=0}} (\displaystyle{\sum^{2^n-1}_{x=0}} (-1)^{f(x) + \bar x \cdot \bar y}) \ket y \otimes (\frac{\ket 0 - \ket 1}{ \sqrt 2})}$
 * Footnotes
+
+[fn:3] Esta la deja intacta
 [fn:2] Al menos en la materia.
 
 [fn:1] En clase no lo vimos como propiedad 9 como tal, lo pongo asi para simplificar
