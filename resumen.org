@@ -575,7 +575,6 @@ Dado ${ \ket \Psi }$,
 - El estado despues de medir: ${ \ket{\widetilde \Psi} = \frac{M_m \ket \Psi}{\sqrt{\braket{\Psi|M_m|\Psi}}} }$
 
 * TODO Paralelismo cuantico
-
 * Algoritmos cuanticos
 ** Deutch
 Es un algoritmo que nos dice si una funcion es balanceada o constante usando *una unica medicion*.
@@ -603,9 +602,82 @@ Generalizacion de deutch para N qubits. Si f(x) es constante, valo lo mismo para
 
 El estado antes de medir es:
 ${ \frac{1}{2^n} \displaystyle{\sum^{2^n-1}_{y=0}} (\displaystyle{\sum^{2^n-1}_{x=0}} (-1)^{f(x) + \bar x \cdot \bar y}) \ket y \otimes (\frac{\ket 0 - \ket 1}{ \sqrt 2})}$
+
+** Protocolo de teleportacion cuantica
+Objetivo: El objetivo de esta técnica es transmitir el estado cuántico de un qubit mediante el envío de 2 bits clásico
+
+Alice tiene en su poder una partícula en el estado cuántico y desea transferirle a Bob el estado de dicha partícula (pero NO puede enviar la partícula) Alice NO conoce el estado de su qubit ${ \ket \Psi }$ y sólo puede enviarle a Bob información clásica
+
+[[file:images/teleportacion-cuantica.png]]
+
+*** Pasos
+1. Alice tiene dos qubits: ${ \ket \Psi }$ (el qubit que quiere enviar) y otro qubit que usara con bob para entrelazar.
+2. Alice y Bob entrelazan el estado de dos qubits y se separan especialmente
+3. Alice aplica compuertas a ${ \Psi }$
+   1. Alice hace CNOT a los dos qubits usando como qubit de control el qubit ${ \Psi }$.
+   2. Alice aplica Hadamard a ${ \Psi }$.
+4. Alice mide y le envia la informacion via un canal clasico.
+5. Dependendiendo de los dos bits obtenidos, Bob tiene que hacer unas operaciones sobre el qubit
+   1.
+      | Bits recibidos | Compuertas a aplicar |
+      |----------------+----------------------|
+      |             00 | Z^0 X^0              |
+      |             01 | Z^0 X^1              |
+      |             10 | Z^1 X^0              |
+      |             11 | Z^1 X^1              |
+
+** Protocolo de codificacion densa
+[[file:images/codificacion-densa.png]]
+
+*** Pasos:
+1. Se separan con qubits entrelazados
+2. Dependendiendo de los bits que queres enviar
+   1. 
+       | Bits a enviar | Compuertas a aplicar |
+       |----------------+----------------------|
+       |             00 | Z^0 X^0              |
+       |             01 | Z^0 X^1              |
+       |             10 | Z^1 X^0              |
+       |             11 | Z^1 X^1              |
+3. Alice le envia el qubit (de forma cuantica)
+4. Se aplican compuertas
+   1. CNOT usando el de Alice de control
+   2. Hadamard a al de control
+5. Medis los dos quits
+6. Sabes que era lo que queria enviar alice con u solo qubit.
+
+** BB84
+Es un protocolo que requiere de un canal clasico.
+Usa foton como qubit, y usa dos bases:
+- Horizontal y Vertical
+- Antidiagonal y Diagonal
+
+*** Pasos
+1. Alice y Bob comuncian por un canal clasico el protocolo que can a usar:
+   1. Si horizonntal representa 0 y Vertical 1 (o al reves). Mismo con Diagonal y antidiagonal
+2. Genera un string de bits al azat
+3. Para cada bit, elige aleatoriamente una de las dos bases y codifica un foton de acuerdo al protocolo
+4. Cuando bob mide cada foton, no sabe con que base lo codifico alice; asique va a medir cada foton con una de las bases que reciba.
+   1. Bob tambien elige al azar con que base medir
+5. Se realiza la reconciliacion de las bases
+   1. Se comunican por un canal clasico las bases que uso cada uno en cada uno de los bits.
+   2. Bob informa con que base uso cada bit. Alice contesta SI O NO dependendiendo si la base coincide on no.
+   3. A Eve no le sirve esta informacion ya que los fotones ya pasaron.
+6. aLICE Y BOB borran de sus respectivos strings los bits en los que se han usado bases diferentes y se quedan con el resto de los string.
+
+*** Teorema de la no clonacion
+No se puede clonar un qubit arbitrario. Ya que no se puede hacer una copua perfecta de un qubit.
+
+
+*** Seguridad
+- Si eve interfiere en el string enviado a Bob, esto va a generar discrepancias con la clave de Bob.
+- En la vida real, los sistemas de distribucion cuanticos, tienen erroes.
+  - Para esto es importante determinar una cota de error.
+
 * Footnotes
 
-[fn:3] Esta la deja intacta
+[fn:1] En clase no lo vimos como propiedad 9 como tal, lo pongo asi para simplificar
+
 [fn:2] Al menos en la materia.
 
-[fn:1] En clase no lo vimos como propiedad 9 como tal, lo pongo asi para simplificar
+[fn:3] Esta la deja intacta
