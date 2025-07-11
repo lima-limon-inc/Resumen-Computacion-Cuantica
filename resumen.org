@@ -236,7 +236,7 @@ ${ \ket \phi = cos(\frac{\theta}{2}) \ket 0 + sen(\frac{\theta}{2}) e^{i \cdot \
 El estado generico se puede escribir:
 #+begin_export latex
 $$
-\ket \Phi = (a \ket 0 + b \ket 1) \otimes (c \ket 0 + \d \ket 1)
+\ket \Phi = (a \ket 0 + b \ket 1) \otimes (c \ket 0 + d \ket 1)
 \ket \Phi = ac \ket{00} + ad \ket {01} + bc \ket{10}  + bd \ket {11}
 $$
 #+end_export
@@ -407,10 +407,12 @@ Replica el efecto de aplicar Z y luego X al ket, con una fase global.
 ${ Y \ket \Phi = e^{i \cdot \frac{\pi}{2}} X Z }$ ${ \ket \Phi }$ .
 *** Efecto BON
 #+begin_export latex
+\begin{center}
 $$
-Y \ket 0 = i \ket 1
-Y \ket 1 = -i \ket 0
+Y \ket 0 = i \ket 1 \\
+Y \ket 1 = -i \ket 0 \\
 $$
+\end{center}
 #+end_export
 *** Representacion matricial
 #+begin_export latex
@@ -426,10 +428,13 @@ Representa una familia de compueras, cada una tomando un valor distinto de ${ \d
 genera una rotación antihoraria (si ${ \delta > 0 }$ ) o una rotación horaria (si ${ \delta < 0 }$) del qubit alrededor del eje z en la esfera de Bloch
 *** Efecto BON
 #+begin_export latex
+\begin{center}
 $$
-R_z(\delta) \ket 0 = \ket 0
-R_z(\delta) \ket 1 = e^{i \cdot \delta} \ket 0
+R_z(\delta) \ket 0 = \ket 0 \\
+
+R_z(\delta) \ket 1 = e^{i \cdot \delta} \ket 1 \\
 $$
+\end{center}
 #+end_export
 
 *** Representacion matricial
@@ -519,7 +524,10 @@ Realiza la sigiente operacion
 
 [[file:images/Fredkin.png]]
 
-El + es "and" y el ${ \cdot  }$ es "or".
+*NOTA*: Es re confusa esa expresion, es mas facil pensarlo como:
+- Si esta a en 1, hay swap. Sino no.
+
+El + es "or" y el ${ \cdot  }$ es "and".
 
 Funciona igual que la not controlada ocn un unico target pero afecta a varios targets.
 
