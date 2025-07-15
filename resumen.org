@@ -204,7 +204,15 @@ ${ \ket {\widetilde \Phi } = \frac{\hat P_n \ket {\Phi (t)}}{\sqrt{\bra \Phi \ha
 ** Postulado 6
 La evolucion de un sistema cuantico se puede describir mediante una transformacion unitaria.
 
-* TODO Experimento Stern-Gerlach
+* Experimento Stern-Gerlach
+Fue por primera vez realizado con atomos de plata calentados en un horno. Estos atomos eran enviados a traves de un campo magnetico, y luego chocaban contra una placa.
+
+La prediccion original decia que los atomos tenian que formar una linea recta en la plca de metal, teniendo una distibucion normal.
+Sin embargo, vieron que los atomos quedaban en dos de las puntas de la placa.
+
+Esto mostro la propiedad de *spin* propia de los electrones: Esta le da al electron un momento angular intrinseco, similar al efecto de girar un obejto.
+
+
 * Qubit
 Objeto matematico cuyo estado es un ket normalizado.
 
@@ -635,10 +643,11 @@ Alice tiene en su poder una partícula en el estado cuántico y desea transferir
       |             11 | Z^1 X^1              |
 
 ** Protocolo de codificacion densa
+La idea de este algoritmo es de enviar dos bits de informacion usando un solo qubit.
 [[file:images/codificacion-densa.png]]
 
 *** Pasos:
-1. Se separan con qubits entrelazados
+1. Se separan dos qubits entrelazados
 2. Dependendiendo de los bits que queres enviar
    1. 
        | Bits a enviar | Compuertas a aplicar |
@@ -681,6 +690,45 @@ No se puede clonar un qubit arbitrario. Ya que no se puede hacer una copua perfe
 - Si eve interfiere en el string enviado a Bob, esto va a generar discrepancias con la clave de Bob.
 - En la vida real, los sistemas de distribucion cuanticos, tienen erroes.
   - Para esto es importante determinar una cota de error.
+
+* Estados entrelazados
+SOn los estados que no se pueden escribir como el producto tensorial de 2 estados de 1 qubit cada uno
+
+** Entropia de Von Neuman
+Si ${ p_i }$ es el autovalor asociado a ${ \hat \rho }$  asociado a ${ \ket i }$  entonces:
+${ S = - \displaystyle{\sum^{N}_{i=i}} p_i \log_2 (p_i)  }$
+
+Si S = 0, es un estado puro. Si S = 1, es entrelazamiento maximo.
+* Estados mezcla
+Es cuando el estado cuantico de un sistema no se puede describir con *un unico vector de estado*. Esto es como una mezcladora de proba. Vos juntas los qubits que estan en distintas estados y "las pones juntas".
+Son varios estados, cada uno con una probabilidad distinta.
+
+O esta en un estado, o en otro. No puede estar en ambos.
+** Operador de densidad
+Es la forma de describir estados mezcla.
+${ \hat \rho (t) = \displaystyle{\sum^{N}_{n,p}} c_n(t) c_n^*(t) \ket{\psi_n} \bra{\psi_n}  }$
+
+*** Propiedades
+- La traza de la matriz asociada mide 1
+*** Representacion matricial
+El elemento en las coordenadas ${ n, p }$ es:
+
+${ \rho_{np} = \braket{\psi_n|\Psi(t)} \braket{\Psi(t)|\psi_p} }$
+
+** Matriz densidad reducida de un sistema bipartito que tiene componentes A y B
+La matriz de densidad reducida para componentes de un sistema bipartito que tiene componentes A y B se determina usando la traza parcial
+
+${ \hat \rho = Tr_B(\hat \rho_{AB}) }$
+${ \hat \rho = Tr_A(\hat \rho_{AB}) }$
+
+EL operador estadistico del sistema es:
+${ \hat \rho_{AB} = \ket{\psi_{AB}} \bra{\psi_{AB}} = \ket{A_1 B_1} \bra{A_2B_2} }$
+
+Los parciales
+${ \hat \rho_A = Tr_A(\hat \rho_{AB}) = \ket{A_1}\bra{A_2} \braket{B_1 | B_2} }$
+${ \hat \rho_B = Tr_B(\hat \rho_{AB}) = \ket{B_1}\bra{B_2} \braket{A_1 | A_2} }$
+
+
 
 * Footnotes
 
